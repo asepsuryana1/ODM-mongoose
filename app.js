@@ -4,7 +4,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var todosRouter = require('./routes/todos');
+
+// getting-started.js
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/tododb', {useNewUrlParser: true});
 
 var app = express();
 
@@ -15,6 +19,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/todos', todosRouter);
 
 module.exports = app;
