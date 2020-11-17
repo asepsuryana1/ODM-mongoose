@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var todo = require ('../models/todo')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('');
+    todo.find({}).then((todos)=>{
+res.json(todos)
+    }).catch((err)=>{
+res.send(err)
+    })
 });
 
 module.exports = router;
