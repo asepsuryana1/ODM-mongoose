@@ -21,4 +21,25 @@ router.post('/', function (req, res, next) {
     })
 });
 
-module.exports = router;
+router.put('/:id', function (req, res, next) {
+    todo.findByIdAndUpdate(
+        req.params.id,
+        {
+            title: req.body.title, complete: req.body.complete
+        }, { new: true}
+        ).then((todos) => {
+            res.json(todos)
+        }).catch((err) => {
+            res.send(err)
+        })
+});
+router.delete('/:id', function (req, res, next) {
+    todo.findByIdAndRemove(
+        req.params.id
+        ).then((todos) => {
+            res.json(todos)
+        }).catch((err) => {
+            res.send(err)
+        })
+});
+module.exports = router; 
